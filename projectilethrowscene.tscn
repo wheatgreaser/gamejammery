@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkjoe21f6j0f2"]
+
+[ext_resource type="Script" path="res://movey.gd" id="1_onsdf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5gmf"]
+size = Vector2(51, 107)
+
+[sub_resource type="QuadMesh" id="QuadMesh_01cie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c06"]
+size = Vector2(1218, 16)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(-17, 113)
+script = ExtResource("1_onsdf")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CharacterBody2D"]
+position = Vector2(183.375, 227.5)
+scale = Vector2(51.25, 106.5)
+mesh = SubResource("QuadMesh_yo6el")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(183.5, 227.5)
+shape = SubResource("RectangleShape2D_n5gmf")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(416, 104)
+zoom = Vector2(1.5, 1.5)
+limit_left = -1000000
+
+[node name="Timer" type="Timer" parent="CharacterBody2D"]
+wait_time = 5.0
+one_shot = true
+
+[node name="floor" type="CharacterBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor"]
+position = Vector2(551, 473)
+rotation = 3.14159
+scale = Vector2(1219.54, -17.0459)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(554, 473)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
