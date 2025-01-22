@@ -23,9 +23,14 @@ func _physics_process(delta):
 		i = 1
 	if Input.is_action_pressed("charge"):
 		#$Timer.start()
-		i += i * delta
-		print(i)
+		if(i <= 10):
+			i += i * delta
+			
+		else:
+			JUMP_VELOCITY = -800
 		JUMP_VELOCITY -= i
+		print(i)
+		
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")

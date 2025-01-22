@@ -36,6 +36,19 @@ limit_left = -1000000
 wait_time = 5.0
 one_shot = true
 
+[node name="floor2" type="CharacterBody2D" parent="."]
+position = Vector2(482, -221)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor2"]
+position = Vector2(551, 473)
+rotation = 3.14159
+scale = Vector2(1219.54, -17.0459)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2"]
+position = Vector2(554, 473)
+shape = SubResource("RectangleShape2D_m7c06")
+
 [node name="floor" type="CharacterBody2D" parent="."]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="floor"]
@@ -47,5 +60,21 @@ mesh = SubResource("QuadMesh_01cie")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
 position = Vector2(554, 473)
 shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="label1" type="RichTextLabel" parent="."]
+offset_left = 151.0
+offset_top = 151.0
+offset_right = 191.0
+offset_bottom = 220.0
+text = "use w to jump"
+fit_content = true
+tab_size = 11
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 372.0
+offset_top = 137.0
+offset_right = 968.0
+offset_bottom = 177.0
+text = "hold shift and then do a jump to do a charged jump"
 
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
