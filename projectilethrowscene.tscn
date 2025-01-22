@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=9 format=3 uid="uid://bkjoe21f6j0f2"]
 
 [ext_resource type="Script" path="res://movey.gd" id="1_onsdf"]
+[ext_resource type="Script" path="res://slime1.gd" id="2_iqj37"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
 
@@ -11,6 +12,11 @@ size = Vector2(51, 107)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c06"]
 size = Vector2(1218, 16)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7eng6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7o6a3"]
+size = Vector2(44, 43)
 
 [node name="Node2D" type="Node2D"]
 
@@ -77,4 +83,21 @@ offset_right = 968.0
 offset_bottom = 177.0
 text = "hold shift and then do a jump to do a charged jump"
 
+[node name="slime1" type="CharacterBody2D" parent="."]
+position = Vector2(-2, -8)
+script = ExtResource("2_iqj37")
+
+[node name="cooltimer" type="Timer" parent="slime1"]
+one_shot = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="slime1"]
+position = Vector2(703, 441.625)
+scale = Vector2(42.5, 42.75)
+mesh = SubResource("QuadMesh_7eng6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime1"]
+position = Vector2(703, 441.5)
+shape = SubResource("RectangleShape2D_7o6a3")
+
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="slime1/cooltimer" to="slime1" method="_on_cooltimer_timeout"]
