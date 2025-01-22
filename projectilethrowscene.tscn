@@ -88,7 +88,8 @@ position = Vector2(-2, -8)
 script = ExtResource("2_iqj37")
 
 [node name="cooltimer" type="Timer" parent="slime1"]
-one_shot = true
+wait_time = 1.5
+autostart = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="slime1"]
 position = Vector2(703, 441.625)
