@@ -39,7 +39,6 @@ zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
 
 [node name="Timer" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.2
 one_shot = true
 
 [node name="floor2" type="CharacterBody2D" parent="."]
