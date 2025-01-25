@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=13 format=3 uid="uid://bkjoe21f6j0f2"]
 
 [ext_resource type="Script" path="res://movey.gd" id="1_onsdf"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="2_75s10"]
 [ext_resource type="Script" path="res://slime1.gd" id="2_iqj37"]
+[ext_resource type="Script" path="res://chain1.gd" id="3_45tl3"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
 
@@ -44,93 +46,198 @@ shape = SubResource("RectangleShape2D_n5gmf")
 position = Vector2(416, 104)
 zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
+script = ExtResource("2_75s10")
 
 [node name="Timer" type="Timer" parent="Player/player"]
 wait_time = 0.2
 one_shot = true
 
 [node name="PinJoint2D" type="PinJoint2D" parent="Player/player"]
-position = Vector2(211, 165)
+visible = false
+position = Vector2(209.145, 234)
 node_a = NodePath("..")
-node_b = NodePath("../../chain1")
+node_b = NodePath("../../chain/chain1")
 
-[node name="chain1" type="RigidBody2D" parent="Player"]
-position = Vector2(49, -64)
-collision_layer = 2
-collision_mask = 2
+[node name="chain" type="Node2D" parent="Player"]
+visible = false
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain1"]
+[node name="chain1" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(47.035, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+script = ExtResource("3_45tl3")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain1"]
 position = Vector2(144, 342)
 scale = Vector2(10, 10)
 mesh = SubResource("SphereMesh_bnvlo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain1"]
 position = Vector2(144, 342)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_pab5f")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain1"]
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain1"]
 position = Vector2(139, 342)
 node_a = NodePath("..")
 node_b = NodePath("../../chain2")
 
-[node name="chain2" type="RigidBody2D" parent="Player"]
-position = Vector2(39, -64)
-collision_layer = 2
-collision_mask = 2
+[node name="chain2" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(43.145, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain2"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain2"]
 position = Vector2(144, 342)
 scale = Vector2(10, 10)
 mesh = SubResource("SphereMesh_bnvlo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain2"]
 position = Vector2(144, 342)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_pab5f")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain2"]
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain2"]
 position = Vector2(139, 342)
 node_a = NodePath("..")
 node_b = NodePath("../../chain3")
 
-[node name="chain3" type="RigidBody2D" parent="Player"]
-position = Vector2(29, -64)
-collision_layer = 2
-collision_mask = 2
+[node name="chain3" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(38.32, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain3"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain3"]
 position = Vector2(144, 342)
 scale = Vector2(10, 10)
 mesh = SubResource("SphereMesh_bnvlo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain3"]
 position = Vector2(144, 342)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_pab5f")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain3"]
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain3"]
 position = Vector2(139, 342)
 node_a = NodePath("..")
 node_b = NodePath("../../chain4")
 
-[node name="chain4" type="RigidBody2D" parent="Player"]
-position = Vector2(19, -64)
-collision_layer = 2
-collision_mask = 2
+[node name="chain4" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(33, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain4"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain4"]
 position = Vector2(144, 342)
 scale = Vector2(10, 10)
 mesh = SubResource("SphereMesh_bnvlo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain4"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain4"]
+position = Vector2(140, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain5")
+
+[node name="chain5" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(28.035, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+script = ExtResource("3_45tl3")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain5"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain5"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain5"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain6")
+
+[node name="chain6" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(23.145, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain6"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain6"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain6"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain7")
+
+[node name="chain7" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(17.32, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain7"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain7"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain7"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain8")
+
+[node name="chain8" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(12, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain8"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain8"]
 position = Vector2(144, 342)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_pab5f")
 
 [node name="floor2" type="CharacterBody2D" parent="."]
 position = Vector2(482, -221)
+collision_layer = 3
+collision_mask = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="floor2"]
 position = Vector2(551, 473)
@@ -142,7 +249,22 @@ mesh = SubResource("QuadMesh_01cie")
 position = Vector2(554, 473)
 shape = SubResource("RectangleShape2D_m7c06")
 
+[node name="floor3" type="CharacterBody2D" parent="."]
+position = Vector2(1196, 0)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor3"]
+position = Vector2(551, 473)
+rotation = 3.14159
+scale = Vector2(1219.54, -17.0459)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor3"]
+position = Vector2(554, 473)
+shape = SubResource("RectangleShape2D_m7c06")
+
 [node name="floor" type="CharacterBody2D" parent="."]
+collision_mask = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="floor"]
 position = Vector2(551, 473)
@@ -185,7 +307,7 @@ offset_bottom = 177.0
 text = "hold shift and then do a jump to do a charged jump"
 
 [node name="slime1" type="CharacterBody2D" parent="."]
-position = Vector2(-2, -8)
+position = Vector2(552, -15)
 script = ExtResource("2_iqj37")
 
 [node name="cooltimer" type="Timer" parent="slime1"]

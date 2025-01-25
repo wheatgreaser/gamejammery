@@ -47,6 +47,10 @@ attack={
 ]
 }
 
+[physics]
+
+2d/solver/solver_iterations=20
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

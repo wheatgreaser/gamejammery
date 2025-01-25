@@ -20,9 +20,13 @@ func _physics_process(delta):
 		JUMP_VELOCITY = -400
 		i = 1
 	if Input.is_action_just_pressed("attack") and isAttackPhase == 1:
+		$Camera2D.apply_shake()
 		velocity.x = SPEED * 10
-		$Timer.start()
 		
+		$Timer.start()
+	if $Camera2D.shake_strength > 0:
+			$Camera2D.shake_strength = lerpf($Camera2D.shake_strength,0,$Camera2D.shakeFade * delta)
+			$Camera2D.offset = $Camera2D.randomOffset()	
 			
 		
 	if Input.is_action_pressed("charge") and isAttackPhase == 0:
