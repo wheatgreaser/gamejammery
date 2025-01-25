@@ -52,5 +52,5 @@ func _on_timer_timeout():
 	isTimedOut = 1
 	velocity.x = -SPEED * 10
 	isTimedOut = 0
-	print("hmmm")
+	
 	
