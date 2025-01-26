@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=18 format=3 uid="uid://bkjoe21f6j0f2"]
 
 [ext_resource type="Script" path="res://movey.gd" id="1_onsdf"]
 [ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="2_7d01g"]
@@ -13,67 +13,7 @@
 size = Vector2(106.667, 96)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_42fn3"]
-radius = 23.0868
-
-[sub_resource type="Animation" id="Animation_e243h"]
-resource_name = "rolling"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.424115, 1.0472, 1.5708]
-}
-
-[sub_resource type="Animation" id="Animation_tgey0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_23863"]
-resource_name = "idle"
-
-[sub_resource type="Animation" id="Animation_ybgwx"]
-resource_name = "rolling_reverse"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [1.5708, -0.523599, -1.0472, -1.5708]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a1ocs"]
-_data = {
-"RESET": SubResource("Animation_tgey0"),
-"idle": SubResource("Animation_23863"),
-"rolling": SubResource("Animation_e243h"),
-"rolling_reverse": SubResource("Animation_ybgwx")
-}
+radius = 28.1603
 
 [sub_resource type="SphereMesh" id="SphereMesh_bnvlo"]
 
@@ -135,14 +75,7 @@ shape = SubResource("RectangleShape2D_n5gmf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/player"]
 position = Vector2(210, 234)
-scale = Vector2(0.996497, 1)
 shape = SubResource("CircleShape2D_42fn3")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/player"]
-libraries = {
-"": SubResource("AnimationLibrary_a1ocs")
-}
-speed_scale = 10.0
 
 [node name="chain" type="Node2D" parent="Player"]
 visible = false
@@ -353,9 +286,9 @@ shape = SubResource("RectangleShape2D_m7c06")
 collision_mask = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="floor"]
-position = Vector2(541, 473)
+position = Vector2(551, 473)
 rotation = 3.14159
-scale = Vector2(1200, 17)
+scale = Vector2(1219.54, -17.0459)
 mesh = SubResource("QuadMesh_01cie")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
@@ -393,12 +326,12 @@ offset_bottom = 177.0
 text = "hold shift and then do a jump to do a charged jump"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-script = ExtResource("6_tk1ae")
 
 [node name="deathey" type="Area2D" parent="CharacterBody2D"]
 modulate = Color(0.462291, 0.462291, 0.462291, 1)
 collision_layer = 3
 collision_mask = 3
+script = ExtResource("6_tk1ae")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/deathey"]
 position = Vector2(2302.1, 1035)
@@ -434,5 +367,4 @@ shape = SubResource("RectangleShape2D_7o6a3")
 
 [connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="CharacterBody2D/deathey" to="CharacterBody2D" method="_on_deathey_body_entered"]
 [connection signal="timeout" from="slime1/cooltimer" to="slime1" method="_on_cooltimer_timeout"]

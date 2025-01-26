@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-
+class_name Slime
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
+var health = 50
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var flag = 1
@@ -16,7 +16,8 @@ func _physics_process(delta):
 		
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	if health <= 0:
+		delete_self()
 	move_and_slide()
 
 
@@ -27,3 +28,6 @@ func _on_cooltimer_timeout():
 	else:
 		velocity.x = SPEED
 		flag = -flag
+		
+func delete_self():
+	queue_free()  # Removes the current node

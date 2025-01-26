@@ -9,19 +9,30 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var isTimedOut = 0
 var i = 1
 var isAttackPhase = 0
-func _physics_process(delta):
+var playerHealth = 100
 
+
+func _physics_process(delta):
+	if playerHealth <= 0:
+		pass
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	if velocity.x > 0:
+		$AnimationPlayer.play("rolling")
+	if velocity.x < 0:
+		$AnimationPlayer.play("rolling_reverse")
+	if velocity.x == 0:
+		$AnimationPlayer.play("idle")
 	if Input.is_action_just_pressed("jump") and is_on_floor() and isAttackPhase == 0:
 		velocity.y = JUMP_VELOCITY
 		JUMP_VELOCITY = -400
 		i = 1
 	if Input.is_action_just_pressed("attack") and isAttackPhase == 1:
+		
 		$Camera2D.apply_shake()
 		velocity.x = SPEED * 10
+		
 		
 		$Timer.start()
 	if $Camera2D.shake_strength > 0:
@@ -40,6 +51,7 @@ func _physics_process(delta):
 	
 		
 	if Input.is_action_just_pressed("attack_phase") and isAttackPhase == 0:
+		velocity.y = 10000
 		isAttackPhase = 1
 	elif Input.is_action_just_pressed("attack_phase") and isAttackPhase == 1:
 		isAttackPhase = 0
@@ -56,5 +68,10 @@ func _on_timer_timeout():
 	isTimedOut = 1
 	velocity.x = -SPEED * 10
 	isTimedOut = 0
-	
-	
+
+func _on_area_2d_body_entered(body):
+	if body is Slime && isAttackPhase == 1:
+		body.health -= 20
+		print(body.health)
+	if body is Deathey:
+		print("you died")
