@@ -99,7 +99,7 @@ size = Vector2(44, 43)
 [node name="Player" type="Node2D" parent="."]
 
 [node name="player" type="CharacterBody2D" parent="Player"]
-position = Vector2(-17, 113)
+position = Vector2(-2579, 195)
 script = ExtResource("1_onsdf")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player/player"]
@@ -110,7 +110,6 @@ texture = ExtResource("2_7d01g")
 
 [node name="Camera2D" type="Camera2D" parent="Player/player"]
 position = Vector2(416, 104)
-zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
 script = ExtResource("2_75s10")
 
@@ -320,76 +319,56 @@ position = Vector2(144, 342)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_pab5f")
 
-[node name="floor2" type="CharacterBody2D" parent="."]
-position = Vector2(482, -221)
-collision_layer = 3
-collision_mask = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="floor2"]
-position = Vector2(551, 473)
-rotation = 3.14159
-scale = Vector2(1219.54, -17.0459)
-mesh = SubResource("QuadMesh_01cie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2"]
-position = Vector2(554, 473)
-shape = SubResource("RectangleShape2D_m7c06")
-
-[node name="floor3" type="CharacterBody2D" parent="."]
-position = Vector2(1196, 0)
-collision_mask = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="floor3"]
-position = Vector2(551, 473)
-rotation = 3.14159
-scale = Vector2(1219.54, -17.0459)
-mesh = SubResource("QuadMesh_01cie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor3"]
-position = Vector2(554, 473)
-shape = SubResource("RectangleShape2D_m7c06")
-
 [node name="floor" type="CharacterBody2D" parent="."]
+position = Vector2(559, 469)
+scale = Vector2(6, 0.6)
 collision_mask = 3
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="floor"]
-position = Vector2(541, 473)
+position = Vector2(-18, 4)
 rotation = 3.14159
 scale = Vector2(1200, 17)
 mesh = SubResource("QuadMesh_01cie")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
-position = Vector2(554, 473)
+position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
 [node name="label1" type="RichTextLabel" parent="."]
-offset_left = 151.0
-offset_top = 151.0
-offset_right = 191.0
-offset_bottom = 220.0
+offset_left = -2360.0
+offset_top = 175.0
+offset_right = -2320.0
+offset_bottom = 244.0
 text = "use w to jump"
 fit_content = true
 tab_size = 11
 
 [node name="label4" type="RichTextLabel" parent="."]
-offset_left = 1055.0
-offset_top = 59.0
-offset_right = 1651.0
-offset_bottom = 99.0
+offset_left = -1246.0
+offset_top = 219.0
+offset_right = -650.0
+offset_bottom = 259.0
 text = "use space to attack"
 
+[node name="label4" type="RichTextLabel" parent="label4"]
+offset_left = 290.0
+offset_top = 6.0
+offset_right = 886.0
+offset_bottom = 46.0
+text = "press f again to exit attack mode"
+
 [node name="label3" type="RichTextLabel" parent="."]
-offset_left = 1022.0
-offset_top = 26.0
-offset_right = 1618.0
-offset_bottom = 66.0
+offset_left = -1292.0
+offset_top = 190.0
+offset_right = -696.0
+offset_bottom = 230.0
 text = "press f to go into attack phase"
 
 [node name="label2" type="RichTextLabel" parent="."]
-offset_left = 372.0
-offset_top = 137.0
-offset_right = 968.0
-offset_bottom = 177.0
+offset_left = -1983.0
+offset_top = 193.0
+offset_right = -1387.0
+offset_bottom = 233.0
 text = "hold shift and then do a jump to do a charged jump"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -416,21 +395,99 @@ scale = Vector2(59.0385, -6.83428)
 shape = SubResource("RectangleShape2D_xssc6")
 
 [node name="slime1" type="CharacterBody2D" parent="."]
-position = Vector2(552, -15)
+position = Vector2(1371, 304)
+scale = Vector2(5, 5)
 script = ExtResource("2_iqj37")
 
 [node name="cooltimer" type="Timer" parent="slime1"]
-wait_time = 1.5
+wait_time = 5.0
 autostart = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="slime1"]
-position = Vector2(703, 441.625)
+position = Vector2(1, 3.625)
 scale = Vector2(42.5, 42.75)
 mesh = SubResource("QuadMesh_7eng6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime1"]
-position = Vector2(703, 441.5)
+position = Vector2(1, 3.5)
 shape = SubResource("RectangleShape2D_7o6a3")
+
+[node name="floor2" type="CharacterBody2D" parent="."]
+position = Vector2(-2552, 403)
+rotation = 1.5708
+scale = Vector2(5, 0.5)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor2"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="floor3" type="CharacterBody2D" parent="."]
+position = Vector2(3553, 186)
+rotation = 1.5708
+scale = Vector2(5, 0.5)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor3"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor3"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="floor4" type="CharacterBody2D" parent="."]
+position = Vector2(552, -1058)
+scale = Vector2(5, 0.5)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor4"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor4"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="floor5" type="CharacterBody2D" parent="."]
+position = Vector2(-1411, 135)
+scale = Vector2(2, 0.2)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor5"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor5"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="floor6" type="CharacterBody2D" parent="."]
+position = Vector2(3415, 206)
+scale = Vector2(1.5, 0.15)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor6"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor6"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
 
 [connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]
