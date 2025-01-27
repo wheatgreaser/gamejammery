@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+class_name Player
 const SPEED = 600.0
 var JUMP_VELOCITY = -400.0
 
@@ -10,11 +10,15 @@ var isTimedOut = 0
 var i = 1
 var isAttackPhase = 0
 var playerHealth = 100
+@onready var healthbar = $Healthbar
 
+func _ready():
+	healthbar.value = playerHealth
 
 func _physics_process(delta):
+	healthbar.value = playerHealth
 	if playerHealth <= 0:
-		pass
+		get_tree().change_scene_to_file("res://youdied.tscn")
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
