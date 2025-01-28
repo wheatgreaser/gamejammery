@@ -1,11 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=26 format=3 uid="uid://bkjoe21f6j0f2"]
 
 [ext_resource type="Script" path="res://movey.gd" id="1_ajqxg"]
 [ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_c1a4j"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="2_cm27y"]
 [ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="3_2u2i8"]
 [ext_resource type="Script" path="res://chain1.gd" id="4_nlw28"]
-[ext_resource type="Script" path="res://deathey.gd" id="5_hnqvf"]
 [ext_resource type="Script" path="res://slime1.gd" id="6_tp32r"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
@@ -91,11 +90,6 @@ bg_color = Color(0, 1, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c06"]
 size = Vector2(1196, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xssc6"]
-size = Vector2(162.643, 20)
-
-[sub_resource type="QuadMesh" id="QuadMesh_7kali"]
-
 [sub_resource type="QuadMesh" id="QuadMesh_7eng6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o6a3"]
@@ -124,7 +118,7 @@ position = Vector2(-2579, 195)
 script = ExtResource("1_ajqxg")
 
 [node name="Camera2D" type="Camera2D" parent="Player/player"]
-position = Vector2(375, 52)
+position = Vector2(391, 60)
 zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
 script = ExtResource("2_cm27y")
@@ -367,29 +361,6 @@ mesh = SubResource("QuadMesh_01cie")
 position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-script = ExtResource("5_hnqvf")
-
-[node name="deathey" type="Area2D" parent="CharacterBody2D"]
-modulate = Color(0.462291, 0.462291, 0.462291, 1)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/deathey"]
-position = Vector2(2302.1, 1035)
-scale = Vector2(59.0385, -6.83428)
-shape = SubResource("RectangleShape2D_xssc6")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="CharacterBody2D/deathey"]
-position = Vector2(-295, 985)
-scale = Vector2(48.8, 17.2105)
-mesh = SubResource("QuadMesh_7kali")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(2302.1, 1035)
-scale = Vector2(59.0385, -6.83428)
-shape = SubResource("RectangleShape2D_xssc6")
-
 [node name="slime1" type="CharacterBody2D" parent="."]
 position = Vector2(-1693, 323)
 scale = Vector2(5, 5)
@@ -412,7 +383,6 @@ shape = SubResource("RectangleShape2D_7o6a3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime1/Area2D"]
 position = Vector2(1.35001, 24)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_dvpdy")
 
 [node name="Healthbar" type="ProgressBar" parent="slime1"]
@@ -473,38 +443,10 @@ mesh = SubResource("QuadMesh_01cie")
 position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
-[node name="floor7" type="CharacterBody2D" parent="."]
-position = Vector2(-1542, -93)
-scale = Vector2(0.25, 1)
-collision_mask = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="floor7"]
-position = Vector2(-18, 4)
-rotation = 3.14159
-scale = Vector2(1200, 17)
-mesh = SubResource("QuadMesh_01cie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor7"]
-position = Vector2(-5, 4)
-shape = SubResource("RectangleShape2D_m7c06")
-
-[node name="floor6" type="CharacterBody2D" parent="."]
-position = Vector2(-2325, 122)
-scale = Vector2(0.5, 1)
-collision_mask = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="floor6"]
-position = Vector2(-18, 4)
-rotation = 3.14159
-scale = Vector2(1200, 17)
-mesh = SubResource("QuadMesh_01cie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor6"]
-position = Vector2(-16, 4)
-shape = SubResource("RectangleShape2D_m7c06")
+[node name="slimeers" type="Node2D" parent="."]
+position = Vector2(-274, 118)
 
 [connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="CharacterBody2D/deathey" to="CharacterBody2D" method="_on_deathey_body_entered"]
 [connection signal="timeout" from="slime1/cooltimer" to="slime1" method="_on_cooltimer_timeout"]
 [connection signal="body_entered" from="slime1/Area2D" to="slime1" method="_on_area_2d_body_entered"]
