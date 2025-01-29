@@ -77,5 +77,11 @@ func _on_area_2d_body_entered(body):
 	if body is Slime && isAttackPhase == 1:
 		body.health -= 20
 		print(body.health)
-	if body is Deathey:
-		print("you died")
+	if body is Slime1 && isAttackPhase == 1:
+		body.health -= 20
+		print(body.health)
+	if body is Slime2 && isAttackPhase == 1:
+		body.health -= 20
+		print(body.health)
+	
+	

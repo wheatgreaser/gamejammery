@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-class_name Slime
+class_name Slime1
 const SPEED = 300.0
 var JUMP_VELOCITY = -1000.0
-var health = 100
+var health = 50
 var clone_speed_1 = 100
 var clone_speed_2 = -100
 var flag2 = 0
@@ -25,7 +25,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	if health <= 0:
-		get_tree().change_scene_to_file("res://bossphase2.tscn")
+		Global.isSlime1Dead = 1
 		
 		
 		queue_free()

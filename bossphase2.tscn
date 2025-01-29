@@ -1,11 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=28 format=3 uid="uid://cjetoubvjfvy3"]
 
-[ext_resource type="Script" path="res://movey.gd" id="1_ajqxg"]
-[ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_c1a4j"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="2_cm27y"]
-[ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="3_2u2i8"]
-[ext_resource type="Script" path="res://chain1.gd" id="4_nlw28"]
-[ext_resource type="Script" path="res://slime1.gd" id="6_tp32r"]
+[ext_resource type="Script" path="res://slimebossfight.gd" id="1_7awm6"]
+[ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="2_ai66o"]
+[ext_resource type="Script" path="res://movey.gd" id="3_1ejxw"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="4_w511u"]
+[ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="5_eeyij"]
+[ext_resource type="Script" path="res://chain1.gd" id="6_sl6yu"]
+[ext_resource type="Script" path="res://slimephase2slime1.gd" id="7_gjv0e"]
+[ext_resource type="Script" path="res://slimephase2slime2.gd" id="8_0gbqn"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
 
@@ -105,29 +107,30 @@ bg_color = Color(0.133196, 0.133196, 0.133196, 1)
 bg_color = Color(1, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_7awm6")
 
 [node name="Blackbg" type="Sprite2D" parent="."]
 position = Vector2(-2084, 61.4999)
 scale = Vector2(19.259, 20.354)
-texture = ExtResource("1_c1a4j")
+texture = ExtResource("2_ai66o")
 
 [node name="Player" type="Node2D" parent="."]
 
 [node name="player" type="CharacterBody2D" parent="Player"]
 position = Vector2(-2579, 195)
-script = ExtResource("1_ajqxg")
+script = ExtResource("3_1ejxw")
 
 [node name="Camera2D" type="Camera2D" parent="Player/player"]
-position = Vector2(564, -117)
+position = Vector2(388, -25)
 zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
-script = ExtResource("2_cm27y")
+script = ExtResource("4_w511u")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player/player"]
 position = Vector2(209.875, 234)
 scale = Vector2(60, 60)
 mesh = SubResource("QuadMesh_yo6el")
-texture = ExtResource("3_2u2i8")
+texture = ExtResource("5_eeyij")
 
 [node name="Timer" type="Timer" parent="Player/player"]
 wait_time = 0.2
@@ -179,7 +182,7 @@ position = Vector2(47.035, 5)
 collision_layer = 0
 collision_mask = 0
 mass = 0.1
-script = ExtResource("4_nlw28")
+script = ExtResource("6_sl6yu")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain1"]
 position = Vector2(144, 342)
@@ -268,7 +271,7 @@ position = Vector2(28.035, 5)
 collision_layer = 0
 collision_mask = 0
 mass = 0.1
-script = ExtResource("4_nlw28")
+script = ExtResource("6_sl6yu")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain5"]
 position = Vector2(144, 342)
@@ -363,8 +366,8 @@ shape = SubResource("RectangleShape2D_m7c06")
 
 [node name="slime1" type="CharacterBody2D" parent="."]
 position = Vector2(-1693, 323)
-scale = Vector2(5, 5)
-script = ExtResource("6_tp32r")
+scale = Vector2(3, 3)
+script = ExtResource("7_gjv0e")
 
 [node name="cooltimer" type="Timer" parent="slime1"]
 wait_time = 5.0
@@ -393,6 +396,7 @@ offset_bottom = -5.6
 scale = Vector2(1, 0.112)
 theme_override_styles/background = SubResource("StyleBoxFlat_65vj6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yv2xx")
+max_value = 50.0
 value = 50.0
 show_percentage = false
 
@@ -452,8 +456,46 @@ position = Vector2(276, 162)
 wait_time = 5.0
 autostart = true
 
+[node name="slime2" type="CharacterBody2D" parent="."]
+position = Vector2(-2071, -28)
+scale = Vector2(3, 3)
+script = ExtResource("8_0gbqn")
+
+[node name="cooltimer" type="Timer" parent="slime2"]
+wait_time = 5.0
+autostart = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="slime2"]
+position = Vector2(1, 3.625)
+scale = Vector2(42.5, 42.75)
+mesh = SubResource("QuadMesh_7eng6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime2"]
+position = Vector2(1, 3.5)
+shape = SubResource("RectangleShape2D_7o6a3")
+
+[node name="Area2D" type="Area2D" parent="slime2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime2/Area2D"]
+position = Vector2(1.35001, 24)
+shape = SubResource("RectangleShape2D_dvpdy")
+
+[node name="Healthbar" type="ProgressBar" parent="slime2"]
+offset_left = -27.8
+offset_top = -32.6
+offset_right = 26.2
+offset_bottom = -5.6
+scale = Vector2(1, 0.112)
+theme_override_styles/background = SubResource("StyleBoxFlat_65vj6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yv2xx")
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
 [connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="slime1/cooltimer" to="slime1" method="_on_cooltimer_timeout"]
 [connection signal="body_entered" from="slime1/Area2D" to="slime1" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="funtimer" to="." method="_on_funtimer_timeout"]
+[connection signal="timeout" from="slime2/cooltimer" to="slime2" method="_on_cooltimer_timeout"]
+[connection signal="body_entered" from="slime2/Area2D" to="slime2" method="_on_area_2d_body_entered"]

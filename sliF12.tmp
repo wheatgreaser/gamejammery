@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=27 format=3 uid="uid://bkjoe21f6j0f2"]
 
 [ext_resource type="Script" path="res://movey.gd" id="1_ajqxg"]
 [ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_c1a4j"]
+[ext_resource type="Script" path="res://slimebossfight.gd" id="1_e1gap"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="2_cm27y"]
 [ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="3_2u2i8"]
 [ext_resource type="Script" path="res://chain1.gd" id="4_nlw28"]
@@ -105,6 +106,7 @@ bg_color = Color(0.133196, 0.133196, 0.133196, 1)
 bg_color = Color(1, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_e1gap")
 
 [node name="Blackbg" type="Sprite2D" parent="."]
 position = Vector2(-2084, 61.4999)
@@ -118,7 +120,7 @@ position = Vector2(-2579, 195)
 script = ExtResource("1_ajqxg")
 
 [node name="Camera2D" type="Camera2D" parent="Player/player"]
-position = Vector2(564, -117)
+position = Vector2(388, -25)
 zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
 script = ExtResource("2_cm27y")
