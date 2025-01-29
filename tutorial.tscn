@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bygt4d1nt687"]
+[gd_scene load_steps=22 format=3 uid="uid://bygt4d1nt687"]
 
+[ext_resource type="Script" path="res://tutorial.gd" id="1_cjrfy"]
 [ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_tewtn"]
 [ext_resource type="Script" path="res://movey.gd" id="2_72xj5"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="3_qkpcw"]
 [ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="4_0mnq4"]
 [ext_resource type="Script" path="res://chain1.gd" id="5_qhjnt"]
+[ext_resource type="FontFile" uid="uid://b7te71ptvd6l0" path="res://Minecraft.ttf" id="6_b4hxr"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
 
@@ -90,6 +92,7 @@ bg_color = Color(0, 1, 0, 1)
 size = Vector2(1196, 16)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_cjrfy")
 
 [node name="Blackbg" type="Sprite2D" parent="."]
 position = Vector2(-2084, 61.4999)
@@ -103,7 +106,7 @@ position = Vector2(-2579, 195)
 script = ExtResource("2_72xj5")
 
 [node name="Camera2D" type="Camera2D" parent="Player/player"]
-position = Vector2(564, -117)
+position = Vector2(410, 51)
 zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
 script = ExtResource("3_qkpcw")
@@ -346,40 +349,8 @@ mesh = SubResource("QuadMesh_01cie")
 position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
-[node name="floor2" type="CharacterBody2D" parent="."]
-position = Vector2(-2619, 82)
-rotation = 1.5708
-scale = Vector2(0.67, 1)
-collision_mask = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="floor2"]
-position = Vector2(-18, 4)
-rotation = 3.14159
-scale = Vector2(1200, 17)
-mesh = SubResource("QuadMesh_01cie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2"]
-position = Vector2(-5, 4)
-shape = SubResource("RectangleShape2D_m7c06")
-
-[node name="floor3" type="CharacterBody2D" parent="."]
-position = Vector2(-1405, 82)
-rotation = 1.5708
-scale = Vector2(0.65, 0.5)
-collision_mask = 3
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="floor3"]
-position = Vector2(-18, 4)
-rotation = 3.14159
-scale = Vector2(1200, 17)
-mesh = SubResource("QuadMesh_01cie")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor3"]
-position = Vector2(-5, 4)
-shape = SubResource("RectangleShape2D_m7c06")
-
 [node name="floor4" type="CharacterBody2D" parent="."]
-position = Vector2(-2011, -318)
+position = Vector2(-1160, 369)
 scale = Vector2(1.05, 0.5)
 collision_mask = 3
 
@@ -393,6 +364,21 @@ mesh = SubResource("QuadMesh_01cie")
 position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
+[node name="floor4" type="CharacterBody2D" parent="floor4"]
+position = Vector2(907.619, -446)
+scale = Vector2(1.05, 0.5)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor4/floor4"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor4/floor4"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
 [node name="slimeers" type="Node2D" parent="."]
 position = Vector2(276, 162)
 
@@ -401,6 +387,51 @@ position = Vector2(276, 162)
 [node name="funtimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -2103.0
+offset_top = 298.0
+offset_right = -1807.0
+offset_bottom = 340.0
+theme_override_fonts/font = ExtResource("6_b4hxr")
+theme_override_font_sizes/font_size = 30
+text = "use w to jump"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = -761.0
+offset_top = -27.0
+offset_right = -44.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("6_b4hxr")
+theme_override_font_sizes/font_size = 30
+text = "press f and then hit space to do attack, press f again to exit the attack mode"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = -1803.0
+offset_top = 138.0
+offset_right = -1086.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("6_b4hxr")
+theme_override_font_sizes/font_size = 30
+text = "hold shift and then press w to do a charged jump"
+
+[node name="Label" type="Label" parent="."]
+offset_left = -2512.0
+offset_top = 304.0
+offset_right = -2216.0
+offset_bottom = 346.0
+theme_override_fonts/font = ExtResource("6_b4hxr")
+theme_override_font_sizes/font_size = 30
+text = "use a and d to move"
+
+[node name="Label" type="Label" parent="Label"]
+offset_left = 2.0
+offset_top = -150.0
+offset_right = 298.0
+offset_bottom = -108.0
+theme_override_fonts/font = ExtResource("6_b4hxr")
+theme_override_font_sizes/font_size = 30
+text = "press escape to quit the tutorial"
 
 [connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]

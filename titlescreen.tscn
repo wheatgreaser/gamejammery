@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccno3wmpod6s1"]
+
+[ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_5hb1m"]
+[ext_resource type="Script" path="res://titlescreen.gd" id="1_x54j7"]
+[ext_resource type="FontFile" uid="uid://b7te71ptvd6l0" path="res://Minecraft.ttf" id="2_p2m25"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_x54j7")
+
+[node name="Blackbg" type="Sprite2D" parent="."]
+position = Vector2(574.75, 319)
+scale = Vector2(31.6888, -14.5599)
+texture = ExtResource("1_5hb1m")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 292.0
+offset_top = 38.0
+offset_right = 1345.0
+offset_bottom = 459.0
+theme_type_variation = &"HeaderLarge"
+theme_override_fonts/font = ExtResource("2_p2m25")
+theme_override_font_sizes/font_size = 115
+text = "flail v. slime"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(584, 328)
+
+[node name="bossfight" type="Button" parent="."]
+offset_left = 443.0
+offset_top = 400.0
+offset_right = 737.0
+offset_bottom = 467.0
+theme_override_fonts/font = ExtResource("2_p2m25")
+theme_override_font_sizes/font_size = 30
+text = "take me to the fight"
+
+[node name="controls" type="Button" parent="."]
+offset_left = 483.0
+offset_top = 293.0
+offset_right = 674.0
+offset_bottom = 360.0
+theme_override_fonts/font = ExtResource("2_p2m25")
+theme_override_font_sizes/font_size = 30
+text = "controls?"
+
+[connection signal="pressed" from="bossfight" to="." method="_on_bossfight_pressed"]
+[connection signal="pressed" from="controls" to="." method="_on_controls_pressed"]
