@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqg484fsu0hd6"]
+[gd_scene load_steps=4 format=3 uid="uid://bqg484fsu0hd6"]
 
 [ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_gndym"]
 [ext_resource type="FontFile" uid="uid://b7te71ptvd6l0" path="res://Minecraft.ttf" id="2_q40d8"]
+[ext_resource type="Script" path="res://tutorial.gd" id="3_4uqho"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("3_4uqho")
 
 [node name="Blackbg" type="Sprite2D" parent="."]
 position = Vector2(574.75, 319)
@@ -22,3 +24,13 @@ text = "you win"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(584, 328)
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 178.0
+offset_top = 336.0
+offset_right = 1354.0
+offset_bottom = 757.0
+theme_type_variation = &"HeaderLarge"
+theme_override_fonts/font = ExtResource("2_q40d8")
+theme_override_font_sizes/font_size = 70
+text = "press esc to go back"

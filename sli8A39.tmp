@@ -1,0 +1,469 @@
+[gd_scene load_steps=29 format=3 uid="uid://bkjoe21f6j0f2"]
+
+[ext_resource type="Script" path="res://movey.gd" id="1_ajqxg"]
+[ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_c1a4j"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="2_cm27y"]
+[ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="3_2u2i8"]
+[ext_resource type="Shader" path="res://slimebossfight.gdshader" id="4_jqggg"]
+[ext_resource type="Script" path="res://chain1.gd" id="4_nlw28"]
+[ext_resource type="Script" path="res://slime1.gd" id="6_tp32r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dcrob"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_epnvh"]
+resource_local_to_scene = true
+shader = ExtResource("4_jqggg")
+shader_parameter/flash_modifier = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5gmf"]
+size = Vector2(106.667, 96)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_42fn3"]
+radius = 23.0868
+
+[sub_resource type="Animation" id="Animation_tgey0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_23863"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_e243h"]
+resource_name = "rolling"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.424115, 1.0472, 1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_ybgwx"]
+resource_name = "rolling_reverse"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.5708, -0.523599, -1.0472, -1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a1ocs"]
+_data = {
+"RESET": SubResource("Animation_tgey0"),
+"idle": SubResource("Animation_23863"),
+"rolling": SubResource("Animation_e243h"),
+"rolling_reverse": SubResource("Animation_ybgwx")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uljo1"]
+bg_color = Color(0.129558, 0.129559, 0.129558, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip7sr"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bnvlo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pab5f"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_01cie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c06"]
+size = Vector2(1196, 16)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7eng6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7o6a3"]
+size = Vector2(44, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvpdy"]
+size = Vector2(43.1, 3.00001)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65vj6"]
+bg_color = Color(0.133196, 0.133196, 0.133196, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv2xx"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Blackbg" type="Sprite2D" parent="."]
+position = Vector2(-2084, 61.4999)
+scale = Vector2(19.259, 20.354)
+texture = ExtResource("1_c1a4j")
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="player" type="CharacterBody2D" parent="Player"]
+material = SubResource("ShaderMaterial_dcrob")
+position = Vector2(-2579, 195)
+script = ExtResource("1_ajqxg")
+
+[node name="Camera2D" type="Camera2D" parent="Player/player"]
+position = Vector2(564, -117)
+zoom = Vector2(1.5, 1.5)
+limit_left = -1000000
+script = ExtResource("2_cm27y")
+
+[node name="sprite" type="MeshInstance2D" parent="Player/player"]
+material = SubResource("ShaderMaterial_epnvh")
+position = Vector2(209.875, 234)
+scale = Vector2(60, 60)
+mesh = SubResource("QuadMesh_yo6el")
+texture = ExtResource("3_2u2i8")
+
+[node name="Timer" type="Timer" parent="Player/player"]
+wait_time = 0.2
+one_shot = true
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/player"]
+visible = false
+position = Vector2(209.145, 234)
+node_a = NodePath("..")
+node_b = NodePath("../../chain/chain1")
+
+[node name="Area2D" type="Area2D" parent="Player/player"]
+position = Vector2(-104, -117)
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/player/Area2D"]
+position = Vector2(209.333, 234)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_n5gmf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/player"]
+position = Vector2(210, 234)
+scale = Vector2(0.996497, 1)
+shape = SubResource("CircleShape2D_42fn3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/player"]
+libraries = {
+"": SubResource("AnimationLibrary_a1ocs")
+}
+speed_scale = 10.0
+
+[node name="Healthbar" type="ProgressBar" parent="Player/player"]
+offset_left = 140.0
+offset_top = 175.0
+offset_right = 290.0
+offset_bottom = 202.0
+scale = Vector2(0.940747, 0.562616)
+theme_override_styles/background = SubResource("StyleBoxFlat_uljo1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ip7sr")
+value = 50.0
+show_percentage = false
+
+[node name="chain" type="Node2D" parent="Player"]
+visible = false
+
+[node name="chain1" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(47.035, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+script = ExtResource("4_nlw28")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain1"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain1"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain1"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain2")
+
+[node name="chain2" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(43.145, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain2"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain2"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain2"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain3")
+
+[node name="chain3" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(38.32, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain3"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain3"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain3"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain4")
+
+[node name="chain4" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(33, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain4"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain4"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain4"]
+position = Vector2(140, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain5")
+
+[node name="chain5" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(28.035, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+script = ExtResource("4_nlw28")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain5"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain5"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain5"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain6")
+
+[node name="chain6" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(23.145, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain6"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain6"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain6"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain7")
+
+[node name="chain7" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(17.32, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain7"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain7"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Player/chain/chain7"]
+position = Vector2(139, 342)
+node_a = NodePath("..")
+node_b = NodePath("../../chain8")
+
+[node name="chain8" type="RigidBody2D" parent="Player/chain"]
+visible = false
+position = Vector2(12, 5)
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/chain/chain8"]
+position = Vector2(144, 342)
+scale = Vector2(10, 10)
+mesh = SubResource("SphereMesh_bnvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/chain/chain8"]
+position = Vector2(144, 342)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_pab5f")
+
+[node name="floor" type="CharacterBody2D" parent="."]
+position = Vector2(-1995, 459)
+scale = Vector2(1.05, 0.6)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="slime1" type="CharacterBody2D" parent="."]
+position = Vector2(-1693, 323)
+scale = Vector2(5, 5)
+script = ExtResource("6_tp32r")
+
+[node name="cooltimer" type="Timer" parent="slime1"]
+wait_time = 5.0
+autostart = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="slime1"]
+position = Vector2(1, 3.625)
+scale = Vector2(42.5, 42.75)
+mesh = SubResource("QuadMesh_7eng6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime1"]
+position = Vector2(1, 3.5)
+shape = SubResource("RectangleShape2D_7o6a3")
+
+[node name="Area2D" type="Area2D" parent="slime1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slime1/Area2D"]
+position = Vector2(1.35001, 24)
+shape = SubResource("RectangleShape2D_dvpdy")
+
+[node name="Healthbar" type="ProgressBar" parent="slime1"]
+offset_left = -27.8
+offset_top = -32.6
+offset_right = 26.2
+offset_bottom = -5.6
+scale = Vector2(1, 0.112)
+theme_override_styles/background = SubResource("StyleBoxFlat_65vj6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yv2xx")
+value = 50.0
+show_percentage = false
+
+[node name="floor2" type="CharacterBody2D" parent="."]
+position = Vector2(-2619, 82)
+rotation = 1.5708
+scale = Vector2(0.67, 1)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor2"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="floor3" type="CharacterBody2D" parent="."]
+position = Vector2(-1405, 82)
+rotation = 1.5708
+scale = Vector2(0.65, 0.5)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor3"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor3"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="floor4" type="CharacterBody2D" parent="."]
+position = Vector2(-2011, -318)
+scale = Vector2(1.05, 0.5)
+collision_mask = 3
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="floor4"]
+position = Vector2(-18, 4)
+rotation = 3.14159
+scale = Vector2(1200, 17)
+mesh = SubResource("QuadMesh_01cie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor4"]
+position = Vector2(-5, 4)
+shape = SubResource("RectangleShape2D_m7c06")
+
+[node name="slimeers" type="Node2D" parent="."]
+position = Vector2(276, 162)
+
+[node name="slimeey" type="Node2D" parent="."]
+
+[node name="funtimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="slime1/cooltimer" to="slime1" method="_on_cooltimer_timeout"]
+[connection signal="body_entered" from="slime1/Area2D" to="slime1" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="funtimer" to="." method="_on_funtimer_timeout"]

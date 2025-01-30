@@ -1,11 +1,21 @@
-[gd_scene load_steps=26 format=3 uid="uid://bkjoe21f6j0f2"]
+[gd_scene load_steps=36 format=3 uid="uid://bkjoe21f6j0f2"]
 
 [ext_resource type="Script" path="res://movey.gd" id="1_ajqxg"]
 [ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="1_c1a4j"]
+[ext_resource type="Script" path="res://coolscript.gd" id="1_xj5hm"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="2_cm27y"]
 [ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="3_2u2i8"]
+[ext_resource type="Shader" path="res://slimebossfight.gdshader" id="4_jqggg"]
 [ext_resource type="Script" path="res://chain1.gd" id="4_nlw28"]
 [ext_resource type="Script" path="res://slime1.gd" id="6_tp32r"]
+[ext_resource type="AudioStream" uid="uid://2hj30ikox1j6" path="res://impact.mp3" id="8_muaxe"]
+[ext_resource type="Texture2D" uid="uid://c8jf6esmb26ks" path="res://slime.png" id="9_masee"]
+[ext_resource type="AudioStream" uid="uid://c1adjyiiyxgf3" path="res://Mega Hyper Ultrastorm.mp3" id="10_8uyb7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_epnvh"]
+resource_local_to_scene = true
+shader = ExtResource("4_jqggg")
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_yo6el"]
 
@@ -20,7 +30,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:rotation")
+tracks/0/path = NodePath("sprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,7 +50,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:rotation")
+tracks/0/path = NodePath("sprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -57,7 +67,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance2D:rotation")
+tracks/0/path = NodePath("sprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -90,10 +100,12 @@ bg_color = Color(0, 1, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c06"]
 size = Vector2(1196, 16)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4d6ox"]
+
 [sub_resource type="QuadMesh" id="QuadMesh_7eng6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o6a3"]
-size = Vector2(44, 43)
+size = Vector2(46.6, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvpdy"]
 size = Vector2(43.1, 3.00001)
@@ -104,7 +116,69 @@ bg_color = Color(0.133196, 0.133196, 0.133196, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv2xx"]
 bg_color = Color(1, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_hmbo5"]
+resource_name = "jump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3.8, 13.925), Vector2(3.8, 2.335)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.06, 0.035), Vector2(0.06, 0.06)]
+}
+
+[sub_resource type="Animation" id="Animation_fxnu2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.80004, 2.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.06, 0.06)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtcyo"]
+_data = {
+"RESET": SubResource("Animation_fxnu2"),
+"jump": SubResource("Animation_hmbo5")
+}
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_xj5hm")
 
 [node name="Blackbg" type="Sprite2D" parent="."]
 position = Vector2(-2084, 61.4999)
@@ -117,13 +191,20 @@ texture = ExtResource("1_c1a4j")
 position = Vector2(-2579, 195)
 script = ExtResource("1_ajqxg")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player/player"]
+position = Vector2(559, -403)
+stream = ExtResource("10_8uyb7")
+volume_db = -15.0
+autoplay = true
+
 [node name="Camera2D" type="Camera2D" parent="Player/player"]
-position = Vector2(564, -117)
+position = Vector2(554, -109)
 zoom = Vector2(1.5, 1.5)
 limit_left = -1000000
 script = ExtResource("2_cm27y")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Player/player"]
+[node name="sprite" type="MeshInstance2D" parent="Player/player"]
+material = SubResource("ShaderMaterial_epnvh")
 position = Vector2(209.875, 234)
 scale = Vector2(60, 60)
 mesh = SubResource("QuadMesh_yo6el")
@@ -169,6 +250,12 @@ theme_override_styles/background = SubResource("StyleBoxFlat_uljo1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ip7sr")
 value = 50.0
 show_percentage = false
+
+[node name="Timer2" type="Timer" parent="Player/player"]
+wait_time = 0.05
+
+[node name="impactplay" type="AudioStreamPlayer2D" parent="Player/player"]
+stream = ExtResource("8_muaxe")
 
 [node name="chain" type="Node2D" parent="Player"]
 visible = false
@@ -362,7 +449,7 @@ position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
 [node name="slime1" type="CharacterBody2D" parent="."]
-position = Vector2(-1693, 323)
+position = Vector2(-1625, 319)
 scale = Vector2(5, 5)
 script = ExtResource("6_tp32r")
 
@@ -370,13 +457,21 @@ script = ExtResource("6_tp32r")
 wait_time = 5.0
 autostart = true
 
+[node name="Slime" type="Sprite2D" parent="slime1"]
+material = SubResource("ShaderMaterial_4d6ox")
+position = Vector2(3.80004, 2.8)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("9_masee")
+
 [node name="MeshInstance2D" type="MeshInstance2D" parent="slime1"]
+visible = false
 position = Vector2(1, 3.625)
 scale = Vector2(42.5, 42.75)
 mesh = SubResource("QuadMesh_7eng6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime1"]
-position = Vector2(1, 3.5)
+position = Vector2(1.30002, 1.5)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_7o6a3")
 
 [node name="Area2D" type="Area2D" parent="slime1"]
@@ -395,6 +490,14 @@ theme_override_styles/background = SubResource("StyleBoxFlat_65vj6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yv2xx")
 value = 50.0
 show_percentage = false
+
+[node name="Timer" type="Timer" parent="slime1"]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="slime1"]
+libraries = {
+"": SubResource("AnimationLibrary_mtcyo")
+}
 
 [node name="floor2" type="CharacterBody2D" parent="."]
 position = Vector2(-2619, 82)
@@ -452,8 +555,14 @@ position = Vector2(276, 162)
 wait_time = 5.0
 autostart = true
 
+[node name="timer3" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Player/player/Timer" to="Player/player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Player/player/Area2D" to="Player/player" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Player/player/Timer2" to="Player/player" method="_on_timer_2_timeout"]
 [connection signal="timeout" from="slime1/cooltimer" to="slime1" method="_on_cooltimer_timeout"]
 [connection signal="body_entered" from="slime1/Area2D" to="slime1" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="slime1/Timer" to="slime1" method="_on_timer_timeout"]
 [connection signal="timeout" from="funtimer" to="." method="_on_funtimer_timeout"]
+[connection signal="timeout" from="timer3" to="." method="_on_timer_3_timeout"]

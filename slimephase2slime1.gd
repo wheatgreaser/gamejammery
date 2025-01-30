@@ -24,6 +24,7 @@ func _physics_process(delta):
 		
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		$AnimationPlayer.play("jump")
 	if health <= 0:
 		Global.isSlime1Dead = 1
 		

@@ -425,6 +425,7 @@ theme_override_font_sizes/font_size = 30
 text = "use a and d to move"
 
 [node name="Label" type="Label" parent="Label"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = -150.0
 offset_right = 298.0
