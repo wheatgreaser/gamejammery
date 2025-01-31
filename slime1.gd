@@ -7,7 +7,7 @@ var health = 100
 var clone_speed_1 = 100
 var clone_speed_2 = -100
 var flag2 = 0
-@onready var healthbar = $Healthbar
+@onready var healthbar = $"../Healthbar2"
 @onready var animationplayer = $AnimationPlayer
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://cjetoubvjfvy3"]
+[gd_scene load_steps=41 format=3 uid="uid://cjetoubvjfvy3"]
 
 [ext_resource type="Script" path="res://slimebossfight.gd" id="1_7awm6"]
 [ext_resource type="Texture2D" uid="uid://bf7htfgbg8qmh" path="res://blackbg.png" id="2_ai66o"]
 [ext_resource type="Script" path="res://movey.gd" id="3_1ejxw"]
+[ext_resource type="Texture2D" uid="uid://ds18hsc88uajk" path="res://icoolbg.png" id="3_sukkd"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="4_w511u"]
 [ext_resource type="Shader" path="res://slimebossfight.gdshader" id="5_8kf28"]
 [ext_resource type="Texture2D" uid="uid://bwgr1ac2vabgo" path="res://flaily.png" id="5_eeyij"]
@@ -117,6 +118,33 @@ bg_color = Color(1, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwgbd"]
 shader = ExtResource("9_ou753")
 
+[sub_resource type="Animation" id="Animation_xeq4b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slime:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.0666667, 0.0666667)]
+}
+
 [sub_resource type="Animation" id="Animation_kqf7x"]
 resource_name = "jump"
 length = 0.2
@@ -145,33 +173,6 @@ tracks/1/keys = {
 "values": [Vector2(0.067, 0.047), Vector2(0.067, 0.067)]
 }
 
-[sub_resource type="Animation" id="Animation_xeq4b"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Slime:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(4, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Slime:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.0666667, 0.0666667)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lw1d0"]
 _data = {
 "RESET": SubResource("Animation_xeq4b"),
@@ -191,6 +192,21 @@ position = Vector2(-2084, 61.4999)
 scale = Vector2(19.259, 20.354)
 texture = ExtResource("2_ai66o")
 
+[node name="Icoolbg3" type="Sprite2D" parent="."]
+position = Vector2(-3545, 112)
+scale = Vector2(2, 2)
+texture = ExtResource("3_sukkd")
+
+[node name="Icoolbg" type="Sprite2D" parent="."]
+position = Vector2(-1979, 117)
+scale = Vector2(2, 2)
+texture = ExtResource("3_sukkd")
+
+[node name="Icoolbg2" type="Sprite2D" parent="."]
+position = Vector2(-389, 120)
+scale = Vector2(2, 2)
+texture = ExtResource("3_sukkd")
+
 [node name="Player" type="Node2D" parent="."]
 
 [node name="player" type="CharacterBody2D" parent="Player"]
@@ -203,12 +219,6 @@ position = Vector2(209.875, 234)
 scale = Vector2(60, 60)
 mesh = SubResource("QuadMesh_yo6el")
 texture = ExtResource("5_eeyij")
-
-[node name="Camera2D" type="Camera2D" parent="Player/player"]
-position = Vector2(372, 45)
-zoom = Vector2(1.5, 1.5)
-limit_left = -1000000
-script = ExtResource("4_w511u")
 
 [node name="Timer" type="Timer" parent="Player/player"]
 wait_time = 0.2
@@ -261,6 +271,18 @@ stream = ExtResource("7_4fkp4")
 stream = ExtResource("8_7u2xh")
 volume_db = -15.0
 autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="Player/player"]
+position = Vector2(535, -49)
+limit_left = -1000000
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.15
+drag_top_margin = 0.15
+drag_right_margin = 0.15
+drag_bottom_margin = 0.0
+script = ExtResource("4_w511u")
 
 [node name="chain" type="Node2D" parent="Player"]
 visible = false
@@ -439,6 +461,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_pab5f")
 
 [node name="floor" type="CharacterBody2D" parent="."]
+visible = false
 position = Vector2(-1995, 459)
 scale = Vector2(1.05, 0.6)
 collision_mask = 3
@@ -496,6 +519,7 @@ libraries = {
 }
 
 [node name="floor2" type="CharacterBody2D" parent="."]
+visible = false
 position = Vector2(-2619, 82)
 rotation = 1.5708
 scale = Vector2(0.67, 1)
@@ -512,6 +536,7 @@ position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
 [node name="floor3" type="CharacterBody2D" parent="."]
+visible = false
 position = Vector2(-1405, 82)
 rotation = 1.5708
 scale = Vector2(0.65, 0.5)
@@ -528,6 +553,7 @@ position = Vector2(-5, 4)
 shape = SubResource("RectangleShape2D_m7c06")
 
 [node name="floor4" type="CharacterBody2D" parent="."]
+visible = false
 position = Vector2(-2011, -318)
 scale = Vector2(1.05, 0.5)
 collision_mask = 3
@@ -572,7 +598,7 @@ shape = SubResource("RectangleShape2D_7o6a3")
 [node name="Area2D" type="Area2D" parent="slime2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime2/Area2D"]
-position = Vector2(1.35001, 24)
+position = Vector2(0.999994, 29.6667)
 shape = SubResource("RectangleShape2D_dvpdy")
 
 [node name="Healthbar" type="ProgressBar" parent="slime2"]
